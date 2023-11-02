@@ -1,13 +1,54 @@
-public class Flight{
-
+class Flight extends Route{
     static int ids = 0;
     int id;
-    City fromCity;
-    City toCity;
-    public Flight(City fromCity, City toCity){
-        this.fromCity = fromCity;
-        this.toCity = toCity;
+    int time;
+    int seatsNum;
+
+    public Flight(City fromCity, City toCity, int seatsNum) {
+        super(fromCity, toCity);
+        this.seatsNum = seatsNum;
         this.id = ids++;
     }
+
+    public int getSeatsNum() {
+        return seatsNum;
+    }
+
+    public void setSeatsNum(int seatsNum) {
+        this.seatsNum = seatsNum;
+    }
+    public void reduceSeats(){
+        int seats = getSeatsNum();
+        seats--;
+        setSeatsNum(seats);
+    }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "id=" + id +
+                ", time=" + time +
+                ", seatsNum=" + seatsNum +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Flight flight)) return false;
+
+        if (id != flight.id) return false;
+        if (time != flight.time) return false;
+        return seatsNum == flight.seatsNum;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + time;
+        result = 31 * result + seatsNum;
+        return result;
+    }
+
 
 }
