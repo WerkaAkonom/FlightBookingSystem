@@ -1,22 +1,36 @@
+package models;
 
-class City {
-    static int ids = 0;
-    int id;
-    String name;
-    String country;
+public class City implements CreateId {
+    private static int ids = 0;
+    private int id;
+    private String name;
+
     public City(String name) {
         this.name = name;
-        //TODO
-        this.country = "USA";
-        this.id = ids++;
-
+        setId();
     }
+    public void setId(){
+        id = ids++;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
     @Override
     public String toString() {
-        return "City{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", country='" + country + '\'' +
+        return "City {" +
+                "id = " + id +
+                ", name = '" + name + '\'' +
+                ", country = '" + country + '\'' +
                 '}';
     }
 

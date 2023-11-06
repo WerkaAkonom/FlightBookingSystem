@@ -6,6 +6,7 @@ public class Main {
 
         bookingApp = new BookingApp();
         bookingApp.startApp();
-        
+        System.out.println(bookingApp.toString());
+
     }
 }
