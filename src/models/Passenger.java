@@ -1,4 +1,6 @@
-class Passenger {
+package models;
+
+public class Passenger {
     int id;
     String name;
     String surname;
@@ -7,9 +9,17 @@ class Passenger {
         this.surname = surname;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
     @Override
     public String toString() {
-        return "Passenger{" +
+        return "models.Passenger{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
@@ -33,4 +43,5 @@ class Passenger {
         result = 31 * result + surname.hashCode();
         return result;
     }
+
 }

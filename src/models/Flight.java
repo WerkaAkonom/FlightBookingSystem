@@ -1,13 +1,25 @@
-class Flight extends Route{
+package models;
+
+public class Flight extends Route {
     static int ids = 0;
     int id;
-    int time;
-    int seatsNum;
+    private int time;
+    private int seatsNum;
 
     public Flight(City fromCity, City toCity, int seatsNum) {
         super(fromCity, toCity);
         this.seatsNum = seatsNum;
         this.id = ids++;
+    }
+    public int getFreeSeats() {
+        return 1;
+    }
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
     }
 
     public int getSeatsNum() {
@@ -25,10 +37,11 @@ class Flight extends Route{
 
     @Override
     public String toString() {
-        return "Flight{" +
-                "id=" + id +
-                ", time=" + time +
-                ", seatsNum=" + seatsNum +
+        return "Flight {" +
+                "id = " + id +
+                ", time = " + time +
+                ", seatsNum = " + seatsNum +
+                " from " + getFromCity() + " to " + getToCity() +
                 '}';
     }
 
