@@ -9,7 +9,8 @@ public class City implements CreateId {
         this.name = name;
         setId();
     }
-    public void setId(){
+
+    public void setId() {
         id = ids++;
     }
 

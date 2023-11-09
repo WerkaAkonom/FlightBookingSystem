@@ -14,8 +14,9 @@ public class MultiSectionRoute extends Route {
         super(fromCity, toCity);
 
     }
+
     public MultiSectionRoute(City fromCity, City toCity, ArrayList<Flight> allFlights) {
-        super(fromCity,toCity);
+        super(fromCity, toCity);
         this.allFlights = allFlights;
     }
 }

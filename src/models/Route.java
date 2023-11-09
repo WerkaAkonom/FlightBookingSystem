@@ -5,7 +5,8 @@ import models.City;
 public abstract class Route {
     private City fromCity;
     private City toCity;
-    public Route(City fromCity, City toCity){
+
+    public Route(City fromCity, City toCity) {
         this.fromCity = fromCity;
         this.toCity = toCity;
     }
