@@ -4,6 +4,7 @@ public class Passenger {
     int id;
     String name;
     String surname;
+
     public Passenger(String name, String surname) {
         this.name = name;
         this.surname = surname;

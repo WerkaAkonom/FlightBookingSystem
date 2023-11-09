@@ -3,6 +3,7 @@ package models;
 public class Reservation {
     private MultiSectionRoute multiSectionRoute;
     private Passenger passenger;
+
     public Reservation(String name, String surname, MultiSectionRoute multiSectionRoute) {
         this.passenger = new Passenger(name, surname);
         this.multiSectionRoute = multiSectionRoute;
@@ -27,6 +28,7 @@ public class Reservation {
     public interface MakeReservation {
 
         MultiSectionRoute getRoute(String fromCity, String toCity);
-        void addReservation(String name, String surname,String fromCity, String toCity);
+
+        void addReservation(String name, String surname, String fromCity, String toCity);
     }
 }

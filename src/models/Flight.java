@@ -11,9 +11,11 @@ public class Flight extends Route {
         this.seatsNum = seatsNum;
         this.id = ids++;
     }
+
     public int getFreeSeats() {
         return 1;
     }
+
     public int getTime() {
         return time;
     }
@@ -29,7 +31,8 @@ public class Flight extends Route {
     public void setSeatsNum(int seatsNum) {
         this.seatsNum = seatsNum;
     }
-    public void reduceSeats(){
+
+    public void reduceSeats() {
         int seats = getSeatsNum();
         seats--;
         setSeatsNum(seats);
