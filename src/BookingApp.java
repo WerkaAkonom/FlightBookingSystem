@@ -4,8 +4,6 @@ import models.City;
 import models.Flight;
 import models.MultiSectionRoute;
 import models.Reservation;
-
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 
@@ -43,16 +41,13 @@ class BookingApp implements Reservation.MakeReservation, StartApplication {
 
         City from = new City(fromCity);
         City to = new City(toCity);
-        for (City c : manager.getCities()) {
-            if (fromCity.equals(c.getName())) {
-                for (City c1 : manager.getCities()) {
-                    if (toCity.equals(c1.getName())) {
-                        return manager.createRoute(from, to);
-                    }
-                }
-            }
+        if(manager.getCities().stream().anyMatch(c -> c.equals(from)) ||
+                manager.getCities().stream().anyMatch(c -> c.equals(to))) {
+            throw new CityNotFoundException("We don't have that city in our database");
         }
-        throw new CityNotFoundException("We don't have that city in our database. Try another City.");
+        else {
+            return manager.createRoute(from, to);
+        }
     }
 
     public void addReservation(String name, String surname, String fromCity, String toCity) {
@@ -67,7 +62,7 @@ class BookingApp implements Reservation.MakeReservation, StartApplication {
     public void startApp() {
         try {
             addReservation("Weronika", "Akonom", "Los Angeles", "Houston");
-
+            addReservation("Frodo", "Baggins", "Phoenix", "Houston");
         } catch (CityNotFoundException e) {
             System.out.println(e);
         }
@@ -77,4 +72,3 @@ class BookingApp implements Reservation.MakeReservation, StartApplication {
 
 }
 //            addReservation("John", "Snow", "Chicago", "Phoenix");
-//            addReservation("Frodo", "Baggins", "Los Angeles", "Houston");
