@@ -1,4 +1,5 @@
-import algorithms.FindRoute;
+import algorithms.Navigable;
+import exceptions.DirectionNotFoundException;
 import exceptions.FlightNotFoundException;
 import models.*;
 
@@ -7,21 +8,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-final class Manager implements FindRoute, SetUpFlightsAndCities {
+final class Manager implements Navigable, SetUpFlightsAndCities {
     public static ArrayList<Passenger> passengers;
-    private ArrayList<Flight> flights;
-    private ArrayList<City> cities;
+    private List<Flight> flights;
+    private List<City> cities;
 
     public Manager() {
         setUpCities();
         setUpFlights();
     }
 
-    public ArrayList<Flight> getFlights() {
+    public List<Flight> getFlights() {
         return flights;
     }
 
-    public ArrayList<City> getCities() {
+    public List<City> getCities() {
         return cities;
     }
 
@@ -41,6 +42,8 @@ final class Manager implements FindRoute, SetUpFlightsAndCities {
         );
     }
 
+
+
     public void setUpFlights() {
         flights = new ArrayList<>(
                 List.of(new Flight(cities.get(0), cities.get(2), 100),
@@ -50,6 +53,20 @@ final class Manager implements FindRoute, SetUpFlightsAndCities {
                         new Flight(cities.get(5), cities.get(4), 100))
 
         );
+        try{
+            addFlights(new City("Chicago") , new City("Philadelphia"), 100 );
+        }
+        catch (DirectionNotFoundException e){
+            System.out.println(e);
+        }
+
+    }
+    private void addFlights(City from, City to, int seatsNum) throws DirectionNotFoundException {
+        if (cities.stream().anyMatch(c -> c.equals(from)) ||
+            cities.stream().anyMatch(c -> c.equals(to))){
+            throw new DirectionNotFoundException("test");
+        }
+
     }
 
     public ArrayList<Flight> findRouteAlgorithm(City fromCity, City toCity) {
@@ -64,7 +81,7 @@ final class Manager implements FindRoute, SetUpFlightsAndCities {
             }
         }
         if (transitFlights.isEmpty()) {
-            throw new FlightNotFoundException("Flight not found.");
+            return transitFlights;
         }
 
         ArrayList<Flight> allFlights = new ArrayList<>(List.of(transitFlights.get(0)));
@@ -89,7 +106,13 @@ final class Manager implements FindRoute, SetUpFlightsAndCities {
     @Override
     public MultiSectionRoute createRoute(City fromCity, City toCity) {
         ArrayList<Flight> allFlights = findRouteAlgorithm(fromCity, toCity);
-        return new MultiSectionRoute(fromCity, toCity, allFlights);
+//        System.out.println(allFlights);
+        if(allFlights.isEmpty()) {
+            throw new FlightNotFoundException("Flight not found");
+        }
+        else {
+            return new MultiSectionRoute(fromCity, toCity, allFlights);
+        }
     }
 
 }

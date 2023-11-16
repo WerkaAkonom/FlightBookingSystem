@@ -1,6 +1,6 @@
 package models;
 
-public class City implements CreateId {
+public class City implements IdCreator {
     private static int ids = 0;
     private int id;
     private String name;

@@ -1,6 +1,6 @@
 package models;
 
-public interface CreateId {
+public interface IdCreator {
     String country = "USA";
 
     void setId();
