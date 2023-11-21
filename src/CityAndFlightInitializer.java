@@ -1,5 +1,4 @@
-public interface SetUpFlightsAndCities {
-
+public interface CityAndFlightInitializer {
 
     void setUpCities();
 

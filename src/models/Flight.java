@@ -13,7 +13,7 @@ public class Flight extends Route {
     }
 
     public int getFreeSeats() {
-        return 1;
+        return seatsNum;
     }
 
     public int getTime() {

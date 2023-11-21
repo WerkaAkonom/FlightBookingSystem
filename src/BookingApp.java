@@ -1,13 +1,12 @@
 import exceptions.CityNotFoundException;
 import exceptions.FlightNotFoundException;
-import models.City;
-import models.Flight;
-import models.MultiSectionRoute;
-import models.Reservation;
+import exceptions.PassengerAlreadyExistsException;
+import models.*;
+
 import java.util.ArrayList;
 
 
-class BookingApp implements Reservation.MakeReservation, StartApplication {
+class BookingApp implements ReservationMaker, AppStarter {
     private static final Manager manager;
     private static final ArrayList<Reservation> reservations;
 
@@ -41,8 +40,8 @@ class BookingApp implements Reservation.MakeReservation, StartApplication {
 
         City from = new City(fromCity);
         City to = new City(toCity);
-        if(manager.getCities().stream().anyMatch(c -> c.equals(from)) ||
-                manager.getCities().stream().anyMatch(c -> c.equals(to))) {
+        if(manager.getCities().stream().noneMatch(c -> c.getName().equals(fromCity)) ||
+                manager.getCities().stream().noneMatch(c -> c.getName().equals(toCity))) {
             throw new CityNotFoundException("We don't have that city in our database");
         }
         else {
@@ -50,23 +49,35 @@ class BookingApp implements Reservation.MakeReservation, StartApplication {
         }
     }
 
-    public void addReservation(String name, String surname, String fromCity, String toCity) {
+
+    public void createReservation(Passenger passenger, String fromCity, String toCity ) {
         try {
-            reservations.add(new Reservation(name, surname, getRoute(fromCity, toCity)));
+            reservations.add(new Reservation(passenger, getRoute(fromCity, toCity)));
+
         } catch (FlightNotFoundException e) {
             System.out.println(e);
         }
 
+
     }
 
     public void startApp() {
+        Passenger passenger = new Passenger("Weronika", "Akonom");
+        Passenger passenger1 = new Passenger("Weronika", "Akonom");
+        try{
+            manager.addPassenger(passenger);
+            manager.addPassenger(passenger1);
+        }catch(PassengerAlreadyExistsException e) {
+            System.out.println(e);
+        }
+
         try {
-            addReservation("Weronika", "Akonom", "Los Angeles", "Houston");
-            addReservation("Frodo", "Baggins", "Phoenix", "Houston");
+            createReservation(passenger, "Los Angeles", "Houston");
+//            addReservation("Frodo", "Baggins", "Phoenix", "Houston");
         } catch (CityNotFoundException e) {
             System.out.println(e);
         }
-        Manager.updatePassengers();
+//        Manager.updatePassengers();
     }
 
 

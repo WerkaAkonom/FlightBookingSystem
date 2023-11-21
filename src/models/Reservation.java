@@ -8,6 +8,10 @@ public class Reservation {
         this.passenger = new Passenger(name, surname);
         this.multiSectionRoute = multiSectionRoute;
     }
+    public Reservation(Passenger passenger, MultiSectionRoute multiSectionRoute) {
+        this.passenger = passenger;
+        this.multiSectionRoute = multiSectionRoute;
+    }
 
     public MultiSectionRoute getMultiSectionRoute() {
         return multiSectionRoute;
@@ -25,10 +29,5 @@ public class Reservation {
         this.passenger = passenger;
     }
 
-    public interface MakeReservation {
 
-        MultiSectionRoute getRoute(String fromCity, String toCity);
-
-        void addReservation(String name, String surname, String fromCity, String toCity);
-    }
 }
