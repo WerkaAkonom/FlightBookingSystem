@@ -1,0 +1,4 @@
+exceptions.DoubledCityException: That city already exists in our database.
+exceptions.PassengerAlreadyExistsException: This Passenger already exist.
+exceptions.DoubledCityException: That city already exists in our database.
+exceptions.PassengerAlreadyExistsException: This Passenger already exist.
