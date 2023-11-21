@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public interface AppStarter {
-    void startApp();
+    void startApp() throws IOException;
 }

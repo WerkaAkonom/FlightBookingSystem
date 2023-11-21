@@ -3,6 +3,12 @@ import exceptions.FlightNotFoundException;
 import exceptions.PassengerAlreadyExistsException;
 import models.*;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
 
@@ -18,7 +24,11 @@ class BookingApp implements ReservationMaker, AppStarter {
     }
 
     static {
-        manager = new Manager();
+        try {
+            manager = new Manager();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         reservations = new ArrayList<>();
     }
 
@@ -50,18 +60,20 @@ class BookingApp implements ReservationMaker, AppStarter {
     }
 
 
-    public void createReservation(Passenger passenger, String fromCity, String toCity ) {
+    public void createReservation(Passenger passenger, String fromCity, String toCity ) throws IOException {
         try {
             reservations.add(new Reservation(passenger, getRoute(fromCity, toCity)));
 
         } catch (FlightNotFoundException e) {
             System.out.println(e);
+            Files.write(Paths.get("src/logs.txt"), String.valueOf("\n"+e).getBytes(), StandardOpenOption.APPEND);
+
         }
 
 
     }
 
-    public void startApp() {
+    public void startApp() throws IOException {
         Passenger passenger = new Passenger("Weronika", "Akonom");
         Passenger passenger1 = new Passenger("Weronika", "Akonom");
         try{
@@ -69,6 +81,7 @@ class BookingApp implements ReservationMaker, AppStarter {
             manager.addPassenger(passenger1);
         }catch(PassengerAlreadyExistsException e) {
             System.out.println(e);
+            Files.write(Paths.get("src/logs.txt"), String.valueOf("\n"+e).getBytes(), StandardOpenOption.APPEND);
         }
 
         try {
@@ -76,6 +89,8 @@ class BookingApp implements ReservationMaker, AppStarter {
 //            addReservation("Frodo", "Baggins", "Phoenix", "Houston");
         } catch (CityNotFoundException e) {
             System.out.println(e);
+            Files.write(Paths.get("src/logs.txt"), String.valueOf("\n"+e).getBytes(), StandardOpenOption.APPEND);
+
         }
 //        Manager.updatePassengers();
     }

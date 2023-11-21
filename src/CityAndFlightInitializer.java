@@ -1,6 +1,8 @@
+import java.io.IOException;
+
 public interface CityAndFlightInitializer {
 
-    void setUpCities();
+    void setUpCities() throws IOException;
 
-    void setUpFlights();
+    void setUpFlights() throws IOException;
 }

@@ -4,7 +4,12 @@ import exceptions.DoubledCityException;
 import exceptions.FlightNotFoundException;
 import exceptions.PassengerAlreadyExistsException;
 import models.*;
-
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 //import java.util.stream.Collectors;
@@ -15,7 +20,7 @@ final class Manager implements Navigable, CityAndFlightInitializer {
     private List<Flight> flights;
     private List<City> cities;
 
-    public Manager() {
+    public Manager() throws IOException {
         setUpCities();
         setUpFlights();
     }
@@ -41,7 +46,7 @@ final class Manager implements Navigable, CityAndFlightInitializer {
 
     }
 
-    public void setUpCities() {
+    public void setUpCities() throws IOException {
         cities = new ArrayList<>(
                 List.of(new City("New York"),
                         new City("Los Angeles"),
@@ -51,9 +56,12 @@ final class Manager implements Navigable, CityAndFlightInitializer {
                         new City("Philadelphia"))
         );
         try {
-            addCity("Detroit");
+            addCity("New York");
         } catch (DoubledCityException e) {
             System.out.println(e);
+
+            Files.write(Paths.get("src/logs.txt"), ("\n" + e).getBytes(), StandardOpenOption.APPEND);
+
         }
     }
 
@@ -67,7 +75,7 @@ final class Manager implements Navigable, CityAndFlightInitializer {
     }
 
 
-    public void setUpFlights() {
+    public void setUpFlights() throws IOException {
         flights = new ArrayList<>(
                 List.of(new Flight(cities.get(0), cities.get(2), 100),
                         new Flight(cities.get(2), cities.get(1), 100),
@@ -77,9 +85,11 @@ final class Manager implements Navigable, CityAndFlightInitializer {
 
         );
         try {
-            addFlights(new City("New York"), new City("Houston"), 100);
+            addFlights(new City("Warsaw"), new City("Houston"), 100);
         } catch (DirectionNotFoundException e) {
             System.out.println(e);
+            Files.write(Paths.get("src/logs.txt"), String.valueOf("\n"+e).getBytes(), StandardOpenOption.APPEND);
+
         }
 
     }
