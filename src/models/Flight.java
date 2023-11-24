@@ -1,10 +1,16 @@
 package models;
 
+import exceptions.Plane;
+
 public class Flight extends Route {
     static int ids = 0;
     int id;
     private int time;
+    // TODO
     private int seatsNum;
+
+    private Plane plane;
+
 
     public Flight(City fromCity, City toCity, int seatsNum) {
         super(fromCity, toCity);

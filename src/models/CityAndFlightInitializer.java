@@ -1,3 +1,5 @@
+package models;
+
 import java.io.IOException;
 
 public interface CityAndFlightInitializer {
