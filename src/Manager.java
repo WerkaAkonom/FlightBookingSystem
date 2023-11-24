@@ -1,29 +1,26 @@
 import algorithms.Navigable;
-import exceptions.DirectionNotFoundException;
-import exceptions.DoubledCityException;
-import exceptions.FlightNotFoundException;
-import exceptions.PassengerAlreadyExistsException;
+import exceptions.*;
 import models.*;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
-//import java.util.stream.Collectors;
+
 
 
 final class Manager implements Navigable, CityAndFlightInitializer {
     private static ArrayList<Passenger> passengers = new ArrayList<>();
     private List<Flight> flights;
     private List<City> cities;
+    private CustomLinkedList<Plane> planes = new CustomLinkedList<Plane>();
 
     public Manager() throws IOException {
         setUpCities();
         setUpFlights();
     }
+
 
     public List<Flight> getFlights() {
         return flights;
@@ -33,10 +30,6 @@ final class Manager implements Navigable, CityAndFlightInitializer {
         return cities;
     }
 
-    //    public static void updatePassengers() {
-//        passengers = BookingApp.getReservations().stream().map(Reservation::getPassenger).
-//                collect(Collectors.toCollection(ArrayList::new));
-//    }
     public void addPassenger(Passenger passenger) throws PassengerAlreadyExistsException {
         if (passengers.stream().anyMatch(c -> c.getName().equals(passenger.getName()))
                 && passengers.stream().anyMatch(c -> c.getSurname().equals(passenger.getSurname()))) {
@@ -60,7 +53,7 @@ final class Manager implements Navigable, CityAndFlightInitializer {
         } catch (DoubledCityException e) {
             System.out.println(e);
 
-            Files.write(Paths.get("src/logs.txt"), ("\n" + e).getBytes(), StandardOpenOption.APPEND);
+//            Files.write(Paths.get("exceptions/logs.txt"), ("\n" + e).getBytes(), StandardOpenOption.APPEND);
 
         }
     }
@@ -73,6 +66,24 @@ final class Manager implements Navigable, CityAndFlightInitializer {
             cities.add(newCity);
         }
     }
+    public void setUpPlanes() throws IOException {
+        Plane plane  = new Plane("Boeing B-17", 100);
+        Plane plane1  = new Plane("Boeing B-29", 100);
+        Plane plane2  = new Plane("Boeing B-50", 100);
+        planes.add(plane);
+        planes.add(plane1);
+        planes.add(plane2);
+        planes.display();
+        try {
+            planes.remove(1);
+        }catch (IndexOutOfBoundsException e) {
+            System.out.println(e);
+            Files.write(Paths.get("src/exceptions/logs.txt"), ("\n" + e).getBytes(), StandardOpenOption.APPEND);
+        }
+        planes.display();
+
+    }
+
 
 
     public void setUpFlights() throws IOException {
@@ -88,7 +99,7 @@ final class Manager implements Navigable, CityAndFlightInitializer {
             addFlights(new City("Warsaw"), new City("Houston"), 100);
         } catch (DirectionNotFoundException e) {
             System.out.println(e);
-            Files.write(Paths.get("src/logs.txt"), String.valueOf("\n"+e).getBytes(), StandardOpenOption.APPEND);
+            Files.write(Paths.get("src/exceptions/logs.txt"), ("\n" + e).getBytes(), StandardOpenOption.APPEND);
 
         }
 
@@ -129,8 +140,7 @@ final class Manager implements Navigable, CityAndFlightInitializer {
             furtherFlights = findRouteAlgorithm(transitFlights.get(0).getToCity(), toCity);
 
             if (furtherFlights.size() != 0 && furtherFlights.size() < allFlights.size()) {
-                allFlights = new ArrayList<>(List.of(transitFlights.get(i))); // czyscimy liste (gdy tam sie znalazlo gorsze rozwiazanie)
-                // dodaje wszystkie loty z dalszej podrozy, ktore zostaly zwrocone przez algorithm
+                allFlights = new ArrayList<>(List.of(transitFlights.get(i)));
                 allFlights.addAll(furtherFlights);
             }
         }

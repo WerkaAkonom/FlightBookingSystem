@@ -2,9 +2,6 @@ import exceptions.CityNotFoundException;
 import exceptions.FlightNotFoundException;
 import exceptions.PassengerAlreadyExistsException;
 import models.*;
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -66,7 +63,7 @@ class BookingApp implements ReservationMaker, AppStarter {
 
         } catch (FlightNotFoundException e) {
             System.out.println(e);
-            Files.write(Paths.get("src/logs.txt"), String.valueOf("\n"+e).getBytes(), StandardOpenOption.APPEND);
+            Files.write(Paths.get("src/exceptions/logs.txt"), ("\n" + e).getBytes(), StandardOpenOption.APPEND);
 
         }
 
@@ -76,25 +73,28 @@ class BookingApp implements ReservationMaker, AppStarter {
     public void startApp() throws IOException {
         Passenger passenger = new Passenger("Weronika", "Akonom");
         Passenger passenger1 = new Passenger("Weronika", "Akonom");
+//        Passenger passenger2 = new Passenger("Frodo", "Baggins");
+//        Passenger passenger3 = new Passenger("John", "Snow");
         try{
             manager.addPassenger(passenger);
             manager.addPassenger(passenger1);
         }catch(PassengerAlreadyExistsException e) {
             System.out.println(e);
-            Files.write(Paths.get("src/logs.txt"), String.valueOf("\n"+e).getBytes(), StandardOpenOption.APPEND);
+            Files.write(Paths.get("src/exceptions/logs.txt"), String.valueOf("\n"+e).getBytes(), StandardOpenOption.APPEND);
         }
 
         try {
             createReservation(passenger, "Los Angeles", "Houston");
-//            addReservation("Frodo", "Baggins", "Phoenix", "Houston");
+//            createReservation("Phoenix", "Houston");
+//            createReservation("Chicago", "Phoenix");
+
         } catch (CityNotFoundException e) {
             System.out.println(e);
-            Files.write(Paths.get("src/logs.txt"), String.valueOf("\n"+e).getBytes(), StandardOpenOption.APPEND);
+            Files.write(Paths.get("src/exceptions/logs.txt"), ("\n" + e).getBytes(), StandardOpenOption.APPEND);
 
         }
-//        Manager.updatePassengers();
     }
 
 
 }
-//            addReservation("John", "Snow", "Chicago", "Phoenix");
+
