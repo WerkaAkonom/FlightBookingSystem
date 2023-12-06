@@ -37,9 +37,9 @@ public class City implements IdCreator {
 
     @Override
     public boolean equals(Object o) {
+        City city = (City) o;
         if (this == o) return true;
-        if (!(o instanceof City city)) return false;
-
+        if (o == null) return false;
         if (id != city.id) return false;
         if (!name.equals(city.name)) return false;
         return country.equals(city.country);

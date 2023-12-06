@@ -40,8 +40,15 @@ public class Flight extends Route {
 
     public void reduceSeats() {
         int seats = getSeatsNum();
-        seats--;
-        setSeatsNum(seats);
+        if(seats > 0){
+            seats--;
+            setSeatsNum(seats);
+        }
+        else{
+            System.out.println("No available seats to reduce.");
+        }
+
+
     }
 
     @Override
@@ -56,11 +63,10 @@ public class Flight extends Route {
 
     @Override
     public boolean equals(Object o) {
+        Flight flight = (Flight) o;
         if (this == o) return true;
-        if (!(o instanceof Flight flight)) return false;
-
+        if (o == null) return false;
         if (id != flight.id) return false;
-        if (time != flight.time) return false;
         return seatsNum == flight.seatsNum;
     }
 

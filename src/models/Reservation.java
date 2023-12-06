@@ -8,6 +8,7 @@ public class Reservation {
         this.passenger = new Passenger(name, surname);
         this.multiSectionRoute = multiSectionRoute;
     }
+
     public Reservation(Passenger passenger, MultiSectionRoute multiSectionRoute) {
         this.passenger = passenger;
         this.multiSectionRoute = multiSectionRoute;
