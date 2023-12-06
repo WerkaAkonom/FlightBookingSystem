@@ -22,16 +22,12 @@ public class City implements IdCreator {
         this.name = name;
     }
 
-    public String getCountry() {
-        return country;
-    }
 
     @Override
     public String toString() {
         return "City {" +
                 "id = " + id +
                 ", name = '" + name + '\'' +
-                ", country = '" + country + '\'' +
                 '}';
     }
 
@@ -40,18 +36,15 @@ public class City implements IdCreator {
         City city = (City) o;
         if (this == o) return true;
         if (o == null) return false;
+
         if (id != city.id) return false;
-        if (!name.equals(city.name)) return false;
-        return country.equals(city.country);
+        return getName().equals(city.getName());
     }
 
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + name.hashCode();
-        result = 31 * result + country.hashCode();
+        result = 31 * result + getName().hashCode();
         return result;
     }
-
-
 }

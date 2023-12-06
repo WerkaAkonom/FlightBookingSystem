@@ -2,6 +2,7 @@ import exceptions.CityNotFoundException;
 import exceptions.FlightNotFoundException;
 import exceptions.PassengerAlreadyExistsException;
 import models.*;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -10,10 +11,11 @@ import java.util.ArrayList;
 
 
 class BookingApp implements ReservationMaker, AppStarter {
-    private static final Manager manager;
+    private final Manager manager;
     private static final ArrayList<Reservation> reservations;
 
-    BookingApp() {
+    BookingApp() throws IOException {
+        this.manager = new Manager();
     }
 
     public static ArrayList<Reservation> getReservations() {
@@ -21,11 +23,7 @@ class BookingApp implements ReservationMaker, AppStarter {
     }
 
     static {
-        try {
-            manager = new Manager();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
         reservations = new ArrayList<>();
     }
 
@@ -47,17 +45,16 @@ class BookingApp implements ReservationMaker, AppStarter {
 
         City from = new City(fromCity);
         City to = new City(toCity);
-        if(manager.getCities().stream().noneMatch(c -> c.getName().equals(fromCity)) ||
+        if (manager.getCities().stream().noneMatch(c -> c.getName().equals(fromCity)) ||
                 manager.getCities().stream().noneMatch(c -> c.getName().equals(toCity))) {
             throw new CityNotFoundException("We don't have that city in our database");
-        }
-        else {
+        } else {
             return manager.createRoute(from, to);
         }
     }
 
 
-    public void createReservation(Passenger passenger, String fromCity, String toCity ) throws IOException {
+    public void createReservation(Passenger passenger, String fromCity, String toCity) throws IOException {
         try {
             reservations.add(new Reservation(passenger, getRoute(fromCity, toCity)));
 
@@ -75,12 +72,12 @@ class BookingApp implements ReservationMaker, AppStarter {
         Passenger passenger1 = new Passenger("Weronika", "Akonom");
 //        Passenger passenger2 = new Passenger("Frodo", "Baggins");
 //        Passenger passenger3 = new Passenger("John", "Snow");
-        try{
+        try {
             manager.addPassenger(passenger);
             manager.addPassenger(passenger1);
-        }catch(PassengerAlreadyExistsException e) {
+        } catch (PassengerAlreadyExistsException e) {
             System.out.println(e);
-            Files.write(Paths.get("src/exceptions/logs.txt"), String.valueOf("\n"+e).getBytes(), StandardOpenOption.APPEND);
+            Files.write(Paths.get("src/exceptions/logs.txt"), String.valueOf("\n" + e).getBytes(), StandardOpenOption.APPEND);
         }
 
         try {
