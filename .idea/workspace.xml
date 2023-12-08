@@ -4,14 +4,58 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fdd181d0-33eb-486a-9a6d-e726d3544470" name="Changes" comment="" />
+    <list default="true" id="fdd181d0-33eb-486a-9a6d-e726d3544470" name="Changes" comment="Deleted redundant field country and all associated usage. In MultisectionRoute convention improved. In BookingApp class Manager field initialization moved to the constructor.">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flightBookingSystem.iml" beforeDir="false" afterPath="$PROJECT_DIR$/flightBookingSystem.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/AppStarter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/BookingApp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/CustomLinkedList$Node.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/CustomLinkedList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/GenericLinkedList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/Manager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/algorithms/Navigable.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/exceptions/CityNotFoundException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/exceptions/DirectionNotFoundException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/exceptions/DoubledCityException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/exceptions/FlightNotFoundException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/exceptions/PassengerAlreadyExistsException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/exceptions/Plane.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/exceptions/logs.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/models/City.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/models/CityAndFlightInitializer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/models/Flight.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/models/IdCreator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/models/MultiSectionRoute.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/models/Passenger.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/models/Reservation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/models/ReservationMaker.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/flightBookingSystem/models/Route.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="collections" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
   </component>
   <component name="ProjectId" id="2ZBYQfHVAnkZAPO5pWYuEAqZRYP" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -23,7 +67,11 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false"
+    "WebServerToolWindowFactoryState": "false",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -34,7 +82,22 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1701896928023</updated>
+      <workItem from="1701954488714" duration="8474000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
